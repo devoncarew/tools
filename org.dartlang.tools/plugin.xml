@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.dartlang.tools.perspective.DartPerspectiveFactory"
+            icon="icons/dart-16.png"
+            id="org.dartlang.tools.dartPerspective"
+            name="Dart">
+      </perspective>
+   </extension>
+   
+   <extension point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.dartlang.tools.preferences.DartPreferencePage"
+            id="org.dartlang.tools.preferences.DartPreferencePage"
+            name="Dart">
+      </page>
+   </extension>
+   
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            id="org.dartlang.tools.dartSourceFile"
+            name="Dart source file"
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="dart"
+            default-charset="UTF-8"/>
+      <content-type
+            id="org.dartlang.tools.pubspecFile"
+            name="Pubspec file"
+            base-type="org.eclipse.core.runtime.text"
+            file-names="pubspec.yaml"
+            default-charset="UTF-8"/>
+   </extension>
+
+   <extension point="org.eclipse.team.core.fileTypes">
+      <fileTypes extension="dart" type="text"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            name="Dart"
+            id="org.dartlang.tools.Dart">
+      </category>
+      <wizard
+            category="org.dartlang.tools.Dart"
+            class="org.dartlang.tools.wizards.NewProjectWizard"
+            finalPerspective="org.dartlang.tools.dartPerspective"
+            icon="icons/dart-16.png"
+            id="org.dartlang.tools.wizards.new.project"
+            name="Dart Project"
+            project="true">
+         <description>
+            Create a new Dart project
+         </description>
+      </wizard>   
+   </extension>   
+   
+</plugin>

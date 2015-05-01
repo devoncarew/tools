@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dart Tools for Eclipse
+Bundle-SymbolicName: org.dartlang.tools;singleton:=true
+Bundle-Version: 0.0.0.qualifier
+Bundle-Activator: org.dartlang.tools.DartPlugin
+Bundle-Vendor: dartlang.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.search,
+ org.eclipse.ui.console,
+ org.eclipse.debug.ui,
+ org.eclipse.ui.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dartlang.tools,
+ org.dartlang.tools.perspective,
+ org.dartlang.tools.preferences
