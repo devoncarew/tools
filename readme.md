@@ -5,7 +5,7 @@ Dart Tools for Eclipse:
 a super light-weight, fast re-envisioning of Dart support in Eclipse.
 
 ## Goals
-- fantastic, light-weight UI; design from the top down
+- fantastic, light-weight UI; designed from the top down
 - use existing functionality wherever possible; do not reinvent the wheel; makes expedient choices
 - rely on Dart tooling where possible (stagehand, analysis server, pub, grinder…)
 
