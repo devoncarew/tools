@@ -2,7 +2,7 @@ org.dartlang.tools
 ==================
 
 Dart Tools for Eclipse:
-a super lightweight, fast re-envisioning of Dart support in Eclipse.
+a super light-weight, fast re-envisioning of Dart support in Eclipse.
 
 ## Goals
 - fantastic, light-weight UI; design from the top down
