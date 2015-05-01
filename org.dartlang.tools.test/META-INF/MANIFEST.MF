@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dart Tools for Eclipse (Test)
 Bundle-SymbolicName: org.dartlang.tools.test
-Bundle-Version: 0.0.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: dartlang.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit,

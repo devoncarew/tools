@@ -2,7 +2,7 @@
 <feature
       id="org.dartlang.tools"
       label="Dart Tools for Eclipse"
-      version="0.0.0.qualifier"
+      version="0.0.1.qualifier"
       provider-name="dartlang.org"
       plugin="org.dartlang.tools">
 
