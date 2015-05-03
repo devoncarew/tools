@@ -63,6 +63,7 @@ public class DartPerspectiveFactory implements IPerspectiveFactory {
 
     layout.addNewWizardShortcut("org.eclipse.ui.wizards.new.folder");
     layout.addNewWizardShortcut("org.dartlang.tools.wizards.new.project");
+    layout.addNewWizardShortcut("org.dartlang.tools.wizards.new.projectExisting");
 
     layout.addPerspectiveShortcut(IDebugUIConstants.ID_DEBUG_PERSPECTIVE);
   }

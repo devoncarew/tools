@@ -25,11 +25,8 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 public class DartPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 
   public DartPreferencePage() {
-    setPreferenceStore(DartPlugin.getDefault().getPreferenceStore());
+    setPreferenceStore(DartPlugin.getPlugin().getPreferenceStore());
     setDescription("Dart Settings");
-  }
-
-  public void init(IWorkbench workbench) {
   }
 
   @Override
@@ -37,5 +34,9 @@ public class DartPreferencePage extends PreferencePage implements IWorkbenchPref
     Label label = new Label(parent, SWT.NONE);
     //label.setText("Dart prefs");
     return label;
+  }
+
+  @Override
+  public void init(IWorkbench workbench) {
   }
 }

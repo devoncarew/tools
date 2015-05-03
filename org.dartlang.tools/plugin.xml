@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension point="org.eclipse.core.resources.natures"
+         id="dartNature"
+         name="Dart">
+      <runtime>
+         <run class="org.dartlang.tools.builder.DartNature"/>
+      </runtime>
+   </extension>
+
+   <extension point="org.eclipse.ui.ide.projectNatureImages">
+      <image
+            icon="icons/dart-nature.png"
+            id="org.dartlang.tools.projectNatureImage"
+            natureId="org.dartlang.tools.dartNature">
+      </image>
+   </extension>
+  
+   <extension point="org.eclipse.core.resources.builders"
+         id="dartBuilder"
+         name="Dart Builder">
+      <builder>
+         <run class="org.dartlang.tools.builder.DartBuilder"/>
+      </builder>
+   </extension>
+
    <extension point="org.eclipse.ui.perspectives">
       <perspective
             class="org.dartlang.tools.perspective.DartPerspectiveFactory"
@@ -25,12 +49,13 @@
             base-type="org.eclipse.core.runtime.text"
             file-extensions="dart"
             default-charset="UTF-8"/>
-      <content-type
+      <!-- content-type
             id="org.dartlang.tools.pubspecFile"
             name="Pubspec file"
             base-type="org.eclipse.core.runtime.text"
             file-names="pubspec.yaml"
-            default-charset="UTF-8"/>
+            default-charset="UTF-8"
+            priority="low" / -->
    </extension>
 
    <extension point="org.eclipse.team.core.fileTypes">
@@ -40,20 +65,50 @@
    <extension point="org.eclipse.ui.newWizards">
       <category
             name="Dart"
-            id="org.dartlang.tools.Dart">
+            id="org.dartlang.tools.dart">
       </category>
       <wizard
-            category="org.dartlang.tools.Dart"
+            category="org.dartlang.tools.dart"
             class="org.dartlang.tools.wizards.NewProjectWizard"
             finalPerspective="org.dartlang.tools.dartPerspective"
-            icon="icons/dart-16.png"
+            icon="icons/wizards/newprj.gif"
             id="org.dartlang.tools.wizards.new.project"
             name="Dart Project"
             project="true">
          <description>
             Create a new Dart project
          </description>
-      </wizard>   
-   </extension>   
+      </wizard>
+      <wizard
+            category="org.dartlang.tools.dart"
+            class="org.dartlang.tools.wizards.ImportProjectWizard"
+            finalPerspective="org.dartlang.tools.dartPerspective"
+            icon="icons/wizards/newprj.gif"
+            id="org.dartlang.tools.wizards.new.projectExisting"
+            name="Import Dart Project"
+            project="true">
+         <description>
+            Create a new Dart project from an existing folder
+         </description>
+      </wizard>
+   </extension>
    
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="org.dartlang.tools.wizards.import"
+            name="Dart">
+      </category>
+      <wizard
+            category="org.dartlang.tools.wizards.import"
+            class="org.dartlang.tools.wizards.ImportProjectWizard"
+            icon="icons/wizards/newprj.gif"
+            id="org.dartlang.tools.import.project"
+            name="Import Dart Project">
+         <description>
+            Create a new Dart project from an existing folder
+         </description>
+      </wizard>
+   </extension>
+
 </plugin>

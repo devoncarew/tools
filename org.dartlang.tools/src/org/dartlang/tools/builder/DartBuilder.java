@@ -11,29 +11,26 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools.wizards;
+package org.dartlang.tools.builder;
 
-import org.dartlang.tools.DartPlugin;
-import org.dartlang.tools.builder.DartNature;
+import java.util.Map;
+
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
+import org.eclipse.core.runtime.IProgressMonitor;
 
-public class NewProjectWizard extends BasicNewProjectResourceWizard {
+public class DartBuilder extends IncrementalProjectBuilder {
+  public static final String BUILDER_ID = "org.dartlang.tools.dartBuilder";
+
+  public DartBuilder() {
+  }
+
   @Override
-  public boolean performFinish() {
-    if (super.performFinish()) {
-      IProject project = getNewProject();
+  protected IProject[] build(int kind, Map<String, String> args, IProgressMonitor monitor)
+      throws CoreException {
+    // TODO: implement a builder
 
-      try {
-        DartNature.addNature(project);
-      } catch (CoreException e) {
-        DartPlugin.showError("Error creating project", e);
-      }
-
-      return true;
-    } else {
-      return false;
-    }
+    return null;
   }
 }
