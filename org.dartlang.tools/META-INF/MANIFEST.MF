@@ -15,4 +15,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.dartlang.tools,
  org.dartlang.tools.perspective,
- org.dartlang.tools.preferences
+ org.dartlang.tools.preferences,
+ org.dartlang.tools.utils

@@ -69,7 +69,7 @@ public class DartProjectUtils {
           op.execute(monitor, WorkspaceUndoUtil.getUIInfoAdapter(shell));
           project.setDefaultCharset("UTF-8", null);
           if (!DartNature.hasDartNature(project)) {
-            if (probablyDartProject(project)) {
+            if (DartNature.probablyDartProject(project)) {
               DartNature.addNature(project);
             }
           }
@@ -98,10 +98,6 @@ public class DartProjectUtils {
     }
 
     return project;
-  }
-
-  public static boolean probablyDartProject(IProject project) {
-    return project.getFile("pubspec.yaml").exists();
   }
 
   private DartProjectUtils() {

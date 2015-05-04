@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
-import org.junit.runners.model.InitializationError;
 import org.osgi.framework.BundleContext;
 
 public class TestPlugin extends Plugin {
@@ -27,7 +26,7 @@ public class TestPlugin extends Plugin {
 
   private static TestPlugin plugin;
 
-  public static IStatus createStatus(InitializationError e) {
+  public static IStatus createStatus(Throwable e) {
     return new Status(IStatus.ERROR, PLUGIN_ID, e.toString(), e);
   }
 
