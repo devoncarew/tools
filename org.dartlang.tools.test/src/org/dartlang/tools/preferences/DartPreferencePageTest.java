@@ -13,9 +13,14 @@
  */
 package org.dartlang.tools.preferences;
 
-import static org.junit.Assert.fail;
-
+import org.dartlang.tools.TestRunnable;
 import org.dartlang.tools.TestUtils;
+import org.eclipse.jface.preference.IPreferencePage;
+import org.eclipse.jface.preference.PreferenceDialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.dialogs.PreferencesUtil;
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,8 +30,37 @@ public class DartPreferencePageTest {
     TestUtils.preFlight();
   }
 
+  private PreferenceDialog dialog;
+
+  @After
+  public void after() throws Exception {
+    if (dialog != null) {
+      Display.getDefault().syncExec(new Runnable() {
+        @Override
+        public void run() {
+          dialog.close();
+        }
+      });
+      dialog = null;
+    }
+  }
+
   @Test
-  public void testCreatePrefPage() {
-    fail("Not yet implemented");
+  public void testCreatePrefPage() throws Throwable {
+    TestUtils.syncExec(new TestRunnable() {
+      @Override
+      public void run() throws Throwable {
+        dialog = PreferencesUtil.createPreferenceDialogOn(
+            null,
+            DartPreferencePage.PAGE_ID,
+            null,
+            null);
+        dialog.setBlockOnOpen(false);
+        dialog.open();
+
+        IPreferencePage page = (IPreferencePage) dialog.getSelectedPage();
+        Assert.assertEquals("Dart", page.getTitle());
+      }
+    });
   }
 }

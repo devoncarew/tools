@@ -40,6 +40,10 @@ public class DartNature implements IProjectNature {
     }
   }
 
+  public static boolean probablyDartProject(IProject project) {
+    return project.getFile("pubspec.yaml").exists();
+  }
+
   private IProject project;
 
   @Override

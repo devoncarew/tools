@@ -13,10 +13,11 @@
  */
 package org.dartlang.tools.perspective;
 
+import org.dartlang.tools.TestRunnable;
 import org.dartlang.tools.TestUtils;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.WorkbenchException;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,10 +28,17 @@ public class DartPerspectiveFactoryTest {
   }
 
   @Test
-  public void testCreatePerspective() throws WorkbenchException {
-    IWorkbench workbench = PlatformUI.getWorkbench();
-    workbench.showPerspective(
-        DartPerspectiveFactory.PERSPECTIVE_ID,
-        workbench.getActiveWorkbenchWindow());
+  public void testCreatePerspective() throws Throwable {
+    TestUtils.syncExec(new TestRunnable() {
+      @Override
+      public void run() throws Throwable {
+        IWorkbench workbench = PlatformUI.getWorkbench();
+        workbench.showPerspective(
+            DartPerspectiveFactory.PERSPECTIVE_ID,
+            workbench.getActiveWorkbenchWindow());
+        String perspectiveId = workbench.getActiveWorkbenchWindow().getActivePage().getPerspective().getId();
+        Assert.assertEquals(DartPerspectiveFactory.PERSPECTIVE_ID, perspectiveId);
+      }
+    });
   }
 }

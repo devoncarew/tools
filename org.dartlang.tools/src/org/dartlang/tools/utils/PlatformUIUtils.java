@@ -11,42 +11,29 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools;
+package org.dartlang.tools.utils;
 
+import org.dartlang.tools.DartPlugin;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.intro.IIntroManager;
-import org.eclipse.ui.intro.IIntroPart;
 
-public class TestUtils {
-  public static void closeWelcome() {
-    final IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
-    IIntroPart part = introManager.getIntro();
-    if (part != null) {
-      introManager.closeIntro(part);
-    }
-  }
+public class PlatformUIUtils {
 
-  public static void preFlight() {
-    closeWelcome();
-  }
-
-  public static void syncExec(final TestRunnable r) throws Throwable {
-    final Throwable t[] = new Throwable[1];
-
-    Display.getDefault().syncExec(new Runnable() {
+  public static void showView(final String id) {
+    Display.getDefault().asyncExec(new Runnable() {
       @Override
       public void run() {
         try {
-          r.run();
-        } catch (Throwable e) {
-          t[0] = e;
+          PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(id);
+        } catch (PartInitException e) {
+          DartPlugin.logError(e);
         }
-      };
+      }
     });
+  }
 
-    if (t[0] != null) {
-      throw t[0];
-    }
+  private PlatformUIUtils() {
+
   }
 }

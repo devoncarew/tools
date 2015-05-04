@@ -27,14 +27,14 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-// TODO: the wizard icon needs to look like a folder with a dart icon and a star
-
-// TODO: need an icon for a dart natured project
-
 public class DartPlugin extends AbstractUIPlugin {
   public static final String PLUGIN_ID = "org.dartlang.tools";
 
   private static DartPlugin plugin;
+
+  public static IStatus createStatus(Throwable e) {
+    return new Status(IStatus.ERROR, PLUGIN_ID, e.toString(), e);
+  }
 
   public static Image getImage(String imagePath) {
     return getPlugin().getPluginImage(imagePath);
@@ -50,7 +50,7 @@ public class DartPlugin extends AbstractUIPlugin {
 
   public static void logError(Throwable e) {
     if (plugin != null) {
-      plugin.getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage(), e));
+      plugin.getLog().log(createStatus(e));
     }
   }
 

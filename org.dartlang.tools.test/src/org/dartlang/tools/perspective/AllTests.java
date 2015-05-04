@@ -11,20 +11,14 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools.builder;
+package org.dartlang.tools.perspective;
 
-import static org.junit.Assert.fail;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-import org.junit.Test;
+@RunWith(Suite.class)
+@SuiteClasses({DartPerspectiveFactoryTest.class})
+public class AllTests {
 
-public class DartNatureTest {
-  @Test
-  public void testAddNature() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testHasDartNature() {
-    fail("Not yet implemented");
-  }
 }

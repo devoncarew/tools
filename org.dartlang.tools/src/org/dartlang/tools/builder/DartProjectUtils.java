@@ -34,17 +34,33 @@ import org.eclipse.ui.ide.undo.WorkspaceUndoUtil;
 
 public class DartProjectUtils {
 
-  public static IProject createNewProject(String projectName, String projectLocation,
-      boolean isImport, final IRunnableContext runnableContext, final Shell shell) {
+  public static IProjectDescription createProjectDescription(IWorkspaceRoot root,
+      String projectName, IPath projectLocation, boolean isImport) {
+    final IProjectDescription description = root.getWorkspace().newProjectDescription(projectName);
+    if (projectLocation != null && !root.getLocation().isPrefixOf(projectLocation) && !isImport) {
+      IPath fullProjectLocation = projectLocation.append(projectName);
+      description.setLocation(fullProjectLocation);
+    } else if (isImport) {
+      description.setLocation(projectLocation);
+    }
+    description.setNatureIds(new String[] {DartNature.NATURE_ID});
+    ICommand command = description.newCommand();
+    command.setBuilderName(DartBuilder.BUILDER_ID);
+    description.setBuildSpec(new ICommand[] {command});
+    return description;
+  }
+
+  public static IProject importDartProject(final Shell shell,
+      final IRunnableContext runnableContext, String projectName, String projectLocation) {
     IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
     final IProjectDescription description = createProjectDescription(
         root,
         projectName,
         projectLocation != null ? new Path(projectLocation) : null,
-        isImport);
+        true);
     final IProject project = root.getProject(description.getName());
 
-    // create the new project operation
+    // Create the new project operation.
     IRunnableWithProgress op = new IRunnableWithProgress() {
       @Override
       public void run(IProgressMonitor monitor) throws InvocationTargetException {
@@ -52,6 +68,11 @@ public class DartProjectUtils {
         try {
           op.execute(monitor, WorkspaceUndoUtil.getUIInfoAdapter(shell));
           project.setDefaultCharset("UTF-8", null);
+          if (!DartNature.hasDartNature(project)) {
+            if (DartNature.probablyDartProject(project)) {
+              DartNature.addNature(project);
+            }
+          }
         } catch (ExecutionException e) {
           throw new InvocationTargetException(e);
         } catch (CoreException e) {
@@ -77,22 +98,6 @@ public class DartProjectUtils {
     }
 
     return project;
-  }
-
-  public static IProjectDescription createProjectDescription(IWorkspaceRoot root,
-      String projectName, IPath projectLocation, boolean isImport) {
-    final IProjectDescription description = root.getWorkspace().newProjectDescription(projectName);
-    if (projectLocation != null && !root.getLocation().isPrefixOf(projectLocation) && !isImport) {
-      IPath fullProjectLocation = projectLocation.append(projectName);
-      description.setLocation(fullProjectLocation);
-    } else if (isImport) {
-      description.setLocation(projectLocation);
-    }
-    description.setNatureIds(new String[] {DartNature.NATURE_ID});
-    ICommand command = description.newCommand();
-    command.setBuilderName(DartBuilder.BUILDER_ID);
-    description.setBuildSpec(new ICommand[] {command});
-    return description;
   }
 
   private DartProjectUtils() {

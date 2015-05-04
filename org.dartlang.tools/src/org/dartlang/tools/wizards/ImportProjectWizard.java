@@ -67,12 +67,11 @@ public class ImportProjectWizard extends Wizard implements INewWizard, IImportWi
 
   @Override
   public boolean performFinish() {
-    IProject project = DartProjectUtils.createNewProject(
-        importPage.getProjectName(),
-        importPage.getProjectLocation(),
-        true,
+    IProject project = DartProjectUtils.importDartProject(
+        getShell(),
         getContainer(),
-        getShell());
+        importPage.getProjectName(),
+        importPage.getProjectLocation());
 
     if (project == null) {
       return false;
