@@ -13,6 +13,7 @@
  */
 package org.dartlang.tools;
 
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.intro.IIntroManager;
 import org.eclipse.ui.intro.IIntroPart;
@@ -28,5 +29,24 @@ public class TestUtils {
 
   public static void preFlight() {
     closeWelcome();
+  }
+
+  public static void syncExec(final TestRunnable r) throws Throwable {
+    final Throwable t[] = new Throwable[1];
+
+    Display.getDefault().syncExec(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          r.run();
+        } catch (Throwable e) {
+          t[0] = e;
+        }
+      };
+    });
+
+    if (t[0] != null) {
+      throw t[0];
+    }
   }
 }

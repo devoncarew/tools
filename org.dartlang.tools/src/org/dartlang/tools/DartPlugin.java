@@ -23,6 +23,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -61,6 +62,19 @@ public class DartPlugin extends AbstractUIPlugin {
         IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
         IStatus status = new Status(IStatus.ERROR, PLUGIN_ID, message, t);
         ErrorDialog.openError(window.getShell(), "Error", message, status);
+      }
+    });
+  }
+
+  public static void showView(final String id) {
+    Display.getDefault().asyncExec(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(id);
+        } catch (PartInitException e) {
+          DartPlugin.logError(e);
+        }
       }
     });
   }

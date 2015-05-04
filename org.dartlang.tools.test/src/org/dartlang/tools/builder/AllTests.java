@@ -13,18 +13,12 @@
  */
 package org.dartlang.tools.builder;
 
-import static org.junit.Assert.fail;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-import org.junit.Test;
+@RunWith(Suite.class)
+@SuiteClasses({DartNatureTest.class})
+public class AllTests {
 
-public class DartNatureTest {
-  @Test
-  public void testAddNature() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testHasDartNature() {
-    fail("Not yet implemented");
-  }
 }

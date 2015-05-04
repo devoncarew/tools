@@ -11,20 +11,8 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools.builder;
+package org.dartlang.tools;
 
-import static org.junit.Assert.fail;
-
-import org.junit.Test;
-
-public class DartNatureTest {
-  @Test
-  public void testAddNature() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testHasDartNature() {
-    fail("Not yet implemented");
-  }
+public interface TestRunnable {
+  public void run() throws Throwable;
 }
