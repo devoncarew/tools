@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.dartlang.tools.DartPlugin;
+
 public class DartSdk {
   final private File directory;
   final private String version;
@@ -52,6 +54,16 @@ public class DartSdk {
 
     DartSdk other = (DartSdk) object;
     return other.getDirectory().equals(getDirectory()) && other.getVersion().equals(getVersion());
+  }
+
+  public String getBinPath(String binTool) {
+    File binDir = new File(directory, "bin");
+
+    if (DartPlugin.isWindows()) {
+      return new File(binDir, binTool + ".bat").getAbsolutePath();
+    } else {
+      return new File(binDir, binTool).getAbsolutePath();
+    }
   }
 
   public File getDirectory() {

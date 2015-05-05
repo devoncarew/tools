@@ -13,10 +13,22 @@
  */
 package org.dartlang.tools.sdk;
 
+import java.io.File;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 public class DartSdkTest {
+  @Test
+  public void testGetBinPath() throws Throwable {
+    DartSdk sdk = DartSdkManager.locateSdk();
+    Assert.assertNotNull(sdk);
+
+    String path = sdk.getBinPath("pub");
+    Assert.assertNotNull(path);
+    Assert.assertTrue(new File(path).exists());
+  }
+
   @Test
   public void testGetDirectory() throws Throwable {
     DartSdk sdk = DartSdkManager.locateSdk();

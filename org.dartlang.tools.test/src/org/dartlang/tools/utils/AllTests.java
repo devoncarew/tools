@@ -18,7 +18,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({PlatformUtilsTest.class, ProcessUtilsTest.class})
+@SuiteClasses({PlatformUtilsTest.class, ProcessUtilsTest.class, SelectionUtilsTest.class})
 public class AllTests {
 
 }
