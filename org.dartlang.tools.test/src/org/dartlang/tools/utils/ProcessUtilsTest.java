@@ -11,20 +11,28 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools.builder;
+package org.dartlang.tools.utils;
 
+import org.dartlang.tools.DartPlugin;
+import org.dartlang.tools.TestUtils;
+import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DartNatureTest {
-  @Test
-  public void testAddNature() {
-    // TODO:
-    //fail("Not yet implemented");
+public class ProcessUtilsTest {
+  @BeforeClass
+  public static void preFlight() throws Exception {
+    TestUtils.preFlight();
   }
 
   @Test
-  public void testHasDartNature() {
-    // TODO:
-    //fail("Not yet implemented");
+  public void textExec() throws Throwable {
+    if (DartPlugin.isWindows()) {
+      String result = ProcessUtils.exec(new String[] {"dir"});
+      Assert.assertNotNull(result);
+    } else {
+      String result = ProcessUtils.exec(new String[] {"ls"});
+      Assert.assertNotNull(result);
+    }
   }
 }

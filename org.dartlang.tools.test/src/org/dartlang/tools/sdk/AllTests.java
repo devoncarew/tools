@@ -11,29 +11,14 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools.utils;
+package org.dartlang.tools.sdk;
 
-import org.dartlang.tools.DartPlugin;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-public class PlatformUIUtils {
+@RunWith(Suite.class)
+@SuiteClasses({DartSdkManagerTest.class, DartSdkTest.class})
+public class AllTests {
 
-  public static void showView(final String id) {
-    Display.getDefault().asyncExec(new Runnable() {
-      @Override
-      public void run() {
-        try {
-          PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(id);
-        } catch (PartInitException e) {
-          DartPlugin.logError(e);
-        }
-      }
-    });
-  }
-
-  private PlatformUIUtils() {
-
-  }
 }

@@ -16,14 +16,15 @@ package org.dartlang.tools;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.dartlang.tools.utils.PlatformUtils;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -48,19 +49,48 @@ public class DartPlugin extends AbstractUIPlugin {
     return plugin;
   }
 
+  public static IPreferenceStore getPrefs() {
+    return getPlugin().getPreferenceStore();
+  }
+
+  public static String getVersionString() {
+    return getPlugin().getBundle().getVersion().toString();
+  }
+
+  public static boolean isLinux() {
+    return !isMac() && !isWindows();
+  }
+
+  public static boolean isMac() {
+    return Platform.getOS().toLowerCase().startsWith("mac");
+  }
+
+  public static boolean isWindows() {
+    return Platform.getOS().toLowerCase().startsWith("win");
+  }
+
   public static void logError(Throwable e) {
     if (plugin != null) {
       plugin.getLog().log(createStatus(e));
     }
   }
 
+  public static void showError(final String title, final String message) {
+    Display.getDefault().asyncExec(new Runnable() {
+      @Override
+      public void run() {
+        IStatus status = new Status(IStatus.ERROR, PLUGIN_ID, message);
+        ErrorDialog.openError(PlatformUtils.getShell(), title, message, status);
+      }
+    });
+  }
+
   public static void showError(final String message, final Throwable t) {
     Display.getDefault().asyncExec(new Runnable() {
       @Override
       public void run() {
-        IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
         IStatus status = new Status(IStatus.ERROR, PLUGIN_ID, message, t);
-        ErrorDialog.openError(window.getShell(), "Error", message, status);
+        ErrorDialog.openError(PlatformUtils.getShell(), "Error", message, status);
       }
     });
   }
