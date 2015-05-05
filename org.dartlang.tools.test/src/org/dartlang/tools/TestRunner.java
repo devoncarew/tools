@@ -13,7 +13,7 @@
  */
 package org.dartlang.tools;
 
-import org.dartlang.tools.utils.PlatformUIUtils;
+import org.dartlang.tools.utils.PlatformUtils;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -138,7 +138,7 @@ public class TestRunner extends Job {
       TestPlugin.getPlugin().log(e);
     }
 
-    PlatformUIUtils.showView(IProgressConstants.PROGRESS_VIEW_ID);
+    PlatformUtils.showView(IProgressConstants.PROGRESS_VIEW_ID);
 
     JUnitCore junitCore = new JUnitCore();
     junitCore.addListener(new TestRunListener(monitor, exitWhenFinished));

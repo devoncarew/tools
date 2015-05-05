@@ -11,20 +11,31 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools.builder;
+package org.dartlang.tools.sdk;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-public class DartNatureTest {
+public class DartSdkTest {
   @Test
-  public void testAddNature() {
-    // TODO:
-    //fail("Not yet implemented");
+  public void testGetDirectory() throws Throwable {
+    DartSdk sdk = DartSdkManager.locateSdk();
+    Assert.assertNotNull(sdk);
+    Assert.assertNotNull(sdk.getDirectory());
   }
 
   @Test
-  public void testHasDartNature() {
-    // TODO:
-    //fail("Not yet implemented");
+  public void testGetVersion() throws Throwable {
+    DartSdk sdk = DartSdkManager.locateSdk();
+    Assert.assertNotNull(sdk);
+    Assert.assertTrue(sdk.isValid());
+  }
+
+  @Test
+  public void testIsValid() throws Throwable {
+    DartSdk sdk = DartSdkManager.locateSdk();
+    Assert.assertNotNull(sdk);
+    Assert.assertTrue(sdk.isValid());
+    Assert.assertFalse(sdk.getVersion().isEmpty());
   }
 }

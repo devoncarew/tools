@@ -13,7 +13,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: org.dartlang.tools,
+Export-Package: com.google.common.base,
+ com.google.common.io,
+ org.dartlang.tools,
  org.dartlang.tools.perspective,
  org.dartlang.tools.preferences,
+ org.dartlang.tools.sdk,
  org.dartlang.tools.utils
+Bundle-ClassPath: lib/guava-18.0.jar,
+ .

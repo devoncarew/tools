@@ -11,19 +11,15 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools;
+package org.dartlang.tools.utils;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+//TODO: check for updates: https://devoncarew.github.io/tools/site.xml
+//http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fp2_api_overview.htm
 
-@RunWith(Suite.class)
-@SuiteClasses({org.dartlang.tools.builder.AllTests.class, //
-    org.dartlang.tools.perspective.AllTests.class, //
-    org.dartlang.tools.preferences.AllTests.class, //
-    org.dartlang.tools.sdk.AllTests.class, //
-    org.dartlang.tools.utils.AllTests.class //
-})
-public class AllTests {
+public class P2Utils {
+  public final String featureID;
 
+  public P2Utils(String featureID) {
+    this.featureID = featureID;
+  }
 }

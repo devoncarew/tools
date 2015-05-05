@@ -11,19 +11,17 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools;
+package org.dartlang.tools.sdk;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.Assert;
+import org.junit.Test;
 
-@RunWith(Suite.class)
-@SuiteClasses({org.dartlang.tools.builder.AllTests.class, //
-    org.dartlang.tools.perspective.AllTests.class, //
-    org.dartlang.tools.preferences.AllTests.class, //
-    org.dartlang.tools.sdk.AllTests.class, //
-    org.dartlang.tools.utils.AllTests.class //
-})
-public class AllTests {
-
+public class DartSdkManagerTest {
+  @Test
+  public void testLocateSdk() throws Throwable {
+    DartSdk sdk = DartSdkManager.locateSdk();
+    Assert.assertNotNull(sdk);
+    Assert.assertTrue(sdk.isValid());
+    Assert.assertFalse(sdk.getVersion().isEmpty());
+  }
 }

@@ -13,16 +13,24 @@
  */
 package org.dartlang.tools.preferences;
 
+import java.io.InputStream;
+import java.net.URL;
+
 import org.dartlang.tools.TestRunnable;
 import org.dartlang.tools.TestUtils;
 import org.eclipse.jface.preference.IPreferencePage;
 import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.dialogs.PreferencesUtil;
+import org.hamcrest.core.StringContains;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.ByteStreams;
+import com.google.common.io.Closeables;
 
 public class DartPreferencePageTest {
   @BeforeClass
@@ -62,5 +70,19 @@ public class DartPreferencePageTest {
         Assert.assertEquals("Dart", page.getTitle());
       }
     });
+  }
+
+  @Test
+  public void testVerifyDownloadsUrl() throws Throwable {
+    URL url = new URL(DartPreferencePage.DOWNLOADS_URL);
+    InputStream in = url.openStream();
+    String str = new String(ByteStreams.toByteArray(in), Charsets.UTF_8);
+    Closeables.closeQuietly(in);
+    Assert.assertNotNull(str);
+
+    // Test that we can see the page.
+    str = str.toLowerCase();
+    Assert.assertThat(str, StringContains.containsString("dart"));
+    Assert.assertThat(str, StringContains.containsString("download"));
   }
 }

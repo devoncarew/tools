@@ -11,19 +11,14 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools;
+package org.dartlang.tools.utils;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({org.dartlang.tools.builder.AllTests.class, //
-    org.dartlang.tools.perspective.AllTests.class, //
-    org.dartlang.tools.preferences.AllTests.class, //
-    org.dartlang.tools.sdk.AllTests.class, //
-    org.dartlang.tools.utils.AllTests.class //
-})
+@SuiteClasses({PlatformUtilsTest.class, ProcessUtilsTest.class})
 public class AllTests {
 
 }
