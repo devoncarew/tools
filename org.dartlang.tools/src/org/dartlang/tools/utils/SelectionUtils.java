@@ -13,19 +13,19 @@
  */
 package org.dartlang.tools.utils;
 
-import org.dartlang.tools.DartPlugin;
-import org.junit.Assert;
-import org.junit.Test;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 
-public class ProcessUtilsTest {
-  @Test
-  public void textExec() throws Throwable {
-    if (DartPlugin.isWindows()) {
-      String result = ProcessUtils.exec(new String[] {"dir"});
-      Assert.assertNotNull(result);
+public class SelectionUtils {
+
+  public static Object single(ISelection sel) {
+    if (sel instanceof IStructuredSelection) {
+      return ((IStructuredSelection) sel).getFirstElement();
     } else {
-      String result = ProcessUtils.exec(new String[] {"ls"});
-      Assert.assertNotNull(result);
+      return null;
     }
+  }
+
+  private SelectionUtils() {
   }
 }

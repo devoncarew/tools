@@ -129,7 +129,7 @@ class ImportProjectWizardPage extends WizardPage {
     });
 
     browseButton = new Button(container, SWT.NONE);
-    browseButton.setText("Browse...");
+    browseButton.setText("Browse…");
     browseButton.setEnabled(true);
     browseButton.addSelectionListener(new SelectionAdapter() {
       @Override

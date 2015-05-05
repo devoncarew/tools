@@ -13,19 +13,18 @@
  */
 package org.dartlang.tools.utils;
 
-import org.dartlang.tools.DartPlugin;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ProcessUtilsTest {
+public class SelectionUtilsTest {
   @Test
-  public void textExec() throws Throwable {
-    if (DartPlugin.isWindows()) {
-      String result = ProcessUtils.exec(new String[] {"dir"});
-      Assert.assertNotNull(result);
-    } else {
-      String result = ProcessUtils.exec(new String[] {"ls"});
-      Assert.assertNotNull(result);
-    }
+  public void testSingle() throws Throwable {
+    Assert.assertNull(SelectionUtils.single(null));
+    Assert.assertNull(SelectionUtils.single(new StructuredSelection()));
+    Assert.assertEquals("foo", SelectionUtils.single(new StructuredSelection(new String[] {"foo"})));
+    Assert.assertEquals(
+        "foo",
+        SelectionUtils.single(new StructuredSelection(new String[] {"foo", "bar"})));
   }
 }

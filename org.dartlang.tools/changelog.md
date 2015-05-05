@@ -1,5 +1,9 @@
 # Dart Tools for Eclipse
 
+### 0.0.3
+- auto-locate the Dart SDK
+- added the ability to run `pub get` and `pub upgrade`
+
 ### 0.0.2
 
 - added an import Dart project wizard

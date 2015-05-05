@@ -170,7 +170,7 @@ public class DartPreferencePage extends PreferencePage implements IWorkbenchPref
   }
 
   protected void handleRefresh() {
-    new Job("Locating Dart SDK...") {
+    new Job("Locating Dart SDK…") {
       @Override
       protected IStatus run(IProgressMonitor monitor) {
         Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
