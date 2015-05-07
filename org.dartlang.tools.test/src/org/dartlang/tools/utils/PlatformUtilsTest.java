@@ -17,24 +17,17 @@ import org.dartlang.tools.TestRunnable;
 import org.dartlang.tools.TestUtils;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PlatformUtilsTest {
-  @BeforeClass
-  public static void preFlight() throws Exception {
-    TestUtils.preFlight();
-  }
-
   @Test
   public void testShowView() throws Throwable {
     TestUtils.syncExec(new TestRunnable() {
       @Override
       public void run() throws Throwable {
-        IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+        IWorkbenchPage page = PlatformUtils.getActivePage();
 
         PlatformUtils.showView(IProgressConstants.PROGRESS_VIEW_ID);
         Assert.assertEquals(

@@ -34,8 +34,6 @@ public class ConsoleUI {
   private static MessageConsoleStream stdout;
   private static MessageConsoleStream stderr;
 
-  private static boolean printedSeparator = false;
-
   static void init() {
     IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
     console = new MessageConsole(NAME, null);
@@ -58,10 +56,9 @@ public class ConsoleUI {
   }
 
   public static void separator() {
-    if (printedSeparator) {
-      stdout();
+    if (console.getDocument().getLength() > 0) {
+      stdout("\n");
     }
-    printedSeparator = true;
   }
 
   public static final void show() {
@@ -72,23 +69,11 @@ public class ConsoleUI {
   }
 
   public static void stderr(String str) {
-    if (str.endsWith("\n")) {
-      stderr.print(str);
-    } else {
-      stderr.println(str);
-    }
-  }
-
-  public static void stdout() {
-    stdout("");
+    stderr.print(str);
   }
 
   public static void stdout(String str) {
-    if (str.endsWith("\n")) {
-      stdout.print(str);
-    } else {
-      stdout.println(str);
-    }
+    stdout.print(str);
   }
 
   private ConsoleUI() {

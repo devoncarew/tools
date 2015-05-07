@@ -13,13 +13,26 @@
  */
 package org.dartlang.tools.utils;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.dartlang.tools.TestRunnable;
+import org.dartlang.tools.TestUtils;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.console.IConsoleConstants;
+import org.junit.Assert;
+import org.junit.Test;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-    ConsoleUITest.class, PlatformUtilsTest.class, ProcessUtilsTest.class, SelectionUtilsTest.class})
-public class AllTests {
+public class ConsoleUITest {
+  @Test
+  public void testShow() throws Throwable {
+    TestUtils.syncExec(new TestRunnable() {
+      @Override
+      public void run() throws Throwable {
+        ConsoleUI.show();
 
+        IWorkbenchPage page = PlatformUtils.getActivePage();
+        Assert.assertEquals(
+            IConsoleConstants.ID_CONSOLE_VIEW,
+            page.getActivePart().getSite().getId());
+      }
+    });
+  }
 }

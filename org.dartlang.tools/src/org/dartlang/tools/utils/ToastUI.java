@@ -33,12 +33,12 @@ public class ToastUI {
           @Override
           public Point getLocation(Point size, Event event) {
             final Rectangle workbenchWindowBounds = shell.getBounds();
-            int xCoord = workbenchWindowBounds.x + workbenchWindowBounds.width - size.x - 24;
+            int xCoord = workbenchWindowBounds.x + workbenchWindowBounds.width - size.x - 20;
             int yCoord = workbenchWindowBounds.y + workbenchWindowBounds.height - size.y - 36;
             return new Point(xCoord, yCoord);
           }
         };
-        toolTip.setHideDelay(3000);
+        toolTip.setHideDelay(4000);
         toolTip.setText(message);
         toolTip.show(new Point(0, 0));
       }
