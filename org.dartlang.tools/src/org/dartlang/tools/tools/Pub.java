@@ -67,7 +67,14 @@ class PubJob extends ToolJob {
   public Process createProcess() throws IOException {
     DartSdk sdk = DartSdkManager.getManager().getSdk();
 
-    ProcessBuilder builder = new ProcessBuilder(sdk.getBinPath("pub"), command);
+    ProcessBuilder builder;
+
+    if (DartPlugin.isMac()) {
+      builder = new ProcessBuilder("/bin/bash", "-l", "-c", sdk.getBinPath("pub") + " " + command);
+    } else {
+      builder = new ProcessBuilder(sdk.getBinPath("pub"), command);
+    }
+
     builder.directory(getContainer().getLocation().toFile());
     return builder.start();
   }

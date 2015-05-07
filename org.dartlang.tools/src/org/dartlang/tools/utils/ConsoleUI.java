@@ -30,9 +30,11 @@ public class ConsoleUI {
     init();
   }
 
-  static MessageConsole console;
-  static MessageConsoleStream stdout;
-  static MessageConsoleStream stderr;
+  private static MessageConsole console;
+  private static MessageConsoleStream stdout;
+  private static MessageConsoleStream stderr;
+
+  private static boolean printedSeparator = false;
 
   static void init() {
     IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
@@ -53,6 +55,13 @@ public class ConsoleUI {
         stderr.setColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
       }
     });
+  }
+
+  public static void separator() {
+    if (printedSeparator) {
+      stdout();
+    }
+    printedSeparator = true;
   }
 
   public static final void show() {

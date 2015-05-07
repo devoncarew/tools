@@ -54,6 +54,8 @@ public class DartPreferencePage extends PreferencePage implements IWorkbenchPref
   public static final String DOWNLOADS_URL = "https://www.dartlang.org/downloads/";
   private static final String DOWNLOADS_URL_DISPLAY = "www.dartlang.org/downloads";
 
+  private static final int LABEL_WIDTH = 60;
+
   private Text sdkPathText;
   private Label versionLabel;
 
@@ -81,25 +83,28 @@ public class DartPreferencePage extends PreferencePage implements IWorkbenchPref
 
     Label label = new Label(group, SWT.NONE);
     label.setText("Version:");
+    GridDataFactory.fillDefaults().align(SWT.LEFT, SWT.CENTER).hint(LABEL_WIDTH, -1).applyTo(label);
     versionLabel = new Label(group, SWT.NONE);
     GridDataFactory.fillDefaults().align(SWT.LEFT, SWT.CENTER).applyTo(versionLabel);
-    Button refreshButton = new Button(group, SWT.PUSH);
-    refreshButton.setText("Refresh");
-    GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).applyTo(refreshButton);
-    refreshButton.addSelectionListener(new SelectionAdapter() {
-      @Override
-      public void widgetSelected(SelectionEvent e) {
-        handleRefresh();
-      }
-    });
+    new Label(group, SWT.NONE);
+//    Button refreshButton = new Button(group, SWT.PUSH);
+//    refreshButton.setText("Refresh");
+//    GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).applyTo(refreshButton);
+//    refreshButton.addSelectionListener(new SelectionAdapter() {
+//      @Override
+//      public void widgetSelected(SelectionEvent e) {
+//        handleRefresh();
+//      }
+//    });
 
     label = new Label(group, SWT.NONE);
     label.setText("Location:");
+    GridDataFactory.fillDefaults().align(SWT.LEFT, SWT.CENTER).hint(LABEL_WIDTH, -1).applyTo(label);
     sdkPathText = new Text(group, SWT.SINGLE | SWT.BORDER | SWT.READ_ONLY);
     GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).hint(100, -1).grab(true, false).applyTo(
         sdkPathText);
     Button browseButton = new Button(group, SWT.PUSH);
-    browseButton.setText("Browse…");
+    browseButton.setText("Browse...");
     GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).applyTo(browseButton);
     browseButton.addSelectionListener(new SelectionAdapter() {
       @Override
@@ -146,6 +151,8 @@ public class DartPreferencePage extends PreferencePage implements IWorkbenchPref
 
     Label label = new Label(group, SWT.NONE);
     label.setText("Version:");
+    GridDataFactory.fillDefaults().align(SWT.LEFT, SWT.CENTER).hint(LABEL_WIDTH, -1).applyTo(label);
+
     label = new Label(group, SWT.NONE);
     label.setText(DartPlugin.getVersionString());
     GridDataFactory.fillDefaults().align(SWT.LEFT, SWT.CENTER).span(2, 1).applyTo(label);
@@ -170,7 +177,7 @@ public class DartPreferencePage extends PreferencePage implements IWorkbenchPref
   }
 
   protected void handleRefresh() {
-    new Job("Locating Dart SDK…") {
+    new Job("Locating Dart SDK...") {
       @Override
       protected IStatus run(IProgressMonitor monitor) {
         Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
