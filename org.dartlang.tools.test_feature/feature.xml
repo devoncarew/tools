@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.dartlang.tools.test.feature"
+      id="org.dartlang.tools.test_feature"
       label="Dart Tools for Eclipse (Test)"
       version="1.0.0.qualifier"
       provider-name="dartlang.org"
