@@ -53,6 +53,10 @@ public class DartPlugin extends AbstractUIPlugin {
     return getPlugin().getPreferenceStore();
   }
 
+  public static String getToolName() {
+    return plugin.getBundle().getHeaders().get("Bundle-Name");
+  }
+
   public static String getVersionString() {
     return getPlugin().getBundle().getVersion().toString();
   }
@@ -116,7 +120,11 @@ public class DartPlugin extends AbstractUIPlugin {
   @Override
   public void start(BundleContext context) throws Exception {
     super.start(context);
+
     plugin = this;
+
+    // Move any expensive startup operations to a job.
+    new StartupJob().schedule();
   }
 
   @Override

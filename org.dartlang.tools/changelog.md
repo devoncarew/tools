@@ -1,4 +1,4 @@
-# Dart Tools for Eclipse
+# Changelog
 
 ### 0.0.3
 - auto-locate the Dart SDK
