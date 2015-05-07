@@ -69,19 +69,11 @@ public class ConsoleUI {
   }
 
   public static void stderr(String str) {
-    //if (str.endsWith("\n")) {
     stderr.print(str);
-    //} else {
-    //  stderr.println(str);
-    //}
   }
 
   public static void stdout(String str) {
-    //if (str.endsWith("\n")) {
     stdout.print(str);
-    //} else {
-    //  stdout.println(str);
-    //}
   }
 
   private ConsoleUI() {
