@@ -57,14 +57,13 @@ class PubJob extends ToolJob {
   public final String command;
 
   public PubJob(IResource resource, String command) {
-    super(resource, "pub " + command);
+    super(resource, "Pub " + command);
 
     this.command = command;
-    this.showStdoutOnSuccess = true;
   }
 
   @Override
-  public Process createProcess() throws IOException {
+  public ProcessBuilder createProcessBuilder() throws IOException {
     DartSdk sdk = DartSdkManager.getManager().getSdk();
 
     ProcessBuilder builder;
@@ -76,6 +75,16 @@ class PubJob extends ToolJob {
     }
 
     builder.directory(getContainer().getLocation().toFile());
-    return builder.start();
+
+    return builder;
+  }
+
+  @Override
+  protected String createToastMessage(ToolResult result) {
+    if (result.exitCode == 0) {
+      return name + ": " + result.getLastStdoutLine().toLowerCase();
+    } else {
+      return super.createToastMessage(result);
+    }
   }
 }
