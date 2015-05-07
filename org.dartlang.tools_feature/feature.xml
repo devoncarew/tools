@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.dartlang.tools"
+      id="org.dartlang.tools_feature"
       label="Dart Tools for Eclipse"
       version="0.0.3.qualifier"
       provider-name="dartlang.org"
@@ -16,12 +16,10 @@
 Licensed under the Eclipse Public License v1.0 (the &quot;License&quot;).
 You may obtain a copy of the License at http://www.eclipse.org/legal/epl-v10.html.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS
-OF ANY KIND, either express or implied. See the License for the
-specific language governing
-permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+language governing permissions and limitations under the License.
    </copyright>
 
    <license url="http://www.eclipse.org/legal/epl-v10.html">
@@ -30,7 +28,8 @@ permissions and limitations under the License.
 Licensed under the Eclipse Public License v1.0 (the &quot;License&quot;).
 You may obtain a copy of the License at http://www.eclipse.org/legal/epl-v10.html.
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS
+Unless required by applicable law or agreed to in writing, software distributed under the
+License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS
 OF ANY KIND, either express or implied. See the License for the specific language governing
 permissions and limitations under the License.
    </license>

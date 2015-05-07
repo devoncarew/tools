@@ -39,7 +39,7 @@ public abstract class ToolJob extends Job {
   public boolean showStdoutOnSuccess = false;
 
   public ToolJob(IResource resource, String name) {
-    super("Running " + name + "…");
+    super("Running " + name + "...");
 
     this.resource = resource;
     this.name = name;
@@ -62,9 +62,9 @@ public abstract class ToolJob extends Job {
 
       Process process = createProcess();
 
-      // TODO: give the user the ability to cancel the job
+      // TODO: Give the user the ability to cancel the job.
 
-      // TODO: read from the input streams so the process doesn't block
+      // TODO: Read from the input streams so the process doesn't block.
       int exitCode = process.waitFor();
 
       String stdout = new String(ByteStreams.toByteArray(process.getInputStream()));
@@ -76,17 +76,18 @@ public abstract class ToolJob extends Job {
         ToastUI.showToast(message);
 
         if (showStdoutOnSuccess) {
+          ConsoleUI.separator();
           ConsoleUI.stdout(message);
           if (!stdout.isEmpty()) {
             ConsoleUI.stdout(stdout);
           }
-          ConsoleUI.stdout();
         }
       } else {
         String message = "'" + name + "' failed [" + exitCode + "].";
 
         ToastUI.showToast(message);
 
+        ConsoleUI.separator();
         ConsoleUI.stdout(message);
         if (!stdout.isEmpty()) {
           ConsoleUI.stdout(stdout);
@@ -94,7 +95,6 @@ public abstract class ToolJob extends Job {
         if (!stderr.isEmpty()) {
           ConsoleUI.stderr(stderr);
         }
-        ConsoleUI.stdout();
       }
 
       getContainer().refreshLocal(IResource.DEPTH_INFINITE, null);
