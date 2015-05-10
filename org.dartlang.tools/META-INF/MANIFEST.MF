@@ -11,7 +11,11 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.console,
  org.eclipse.debug.ui,
  org.eclipse.ui.ide,
- org.eclipse.text
+ org.eclipse.text,
+ org.eclipse.core.filebuffers,
+ org.eclipse.jface.text,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.views
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.google.common.base,
