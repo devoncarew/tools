@@ -14,7 +14,6 @@
 package org.dartlang.tools.editor.util;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.swt.graphics.Color;
@@ -25,34 +24,28 @@ import org.eclipse.swt.widgets.Display;
  * Manager for colors used in the Dart editor.
  */
 public class DartEditorColorProvider {
+  public static final RGB DEFAULT = new RGB(0, 0, 0);
+
   public static final RGB COMMENT = new RGB(65, 128, 96);
   public static final RGB KEYWORD = new RGB(0, 0, 128);
   public static final RGB TYPE = new RGB(0, 0, 128);
   public static final RGB STRING = new RGB(45, 36, 251);
 
-  public static final RGB DEFAULT = new RGB(0, 0, 0);
-
   public static final RGB DARTDOC_DEFAULT = new RGB(65, 98, 188);
   public static final RGB DARTDOC_CODE = new RGB(128, 160, 190);
 
-  protected Map<RGB, Color> colorTable = new HashMap<RGB, Color>();
+  protected Map<RGB, Color> colorMap = new HashMap<RGB, Color>();
 
-  static private DartEditorColorProvider colorProvider;
+  private static DartEditorColorProvider colorProvider = new DartEditorColorProvider();
 
   public static DartEditorColorProvider getColorProvider() {
-    if (colorProvider == null) {
-      colorProvider = new DartEditorColorProvider();
-    }
     return colorProvider;
   }
 
-  /**
-   * Release all of the color resources.
-   */
+  /** Release all of the color resources. */
   public void dispose() {
-    Iterator<Color> e = colorTable.values().iterator();
-    while (e.hasNext()) {
-      e.next().dispose();
+    for (Color color : colorMap.values()) {
+      color.dispose();
     }
   }
 
@@ -63,10 +56,10 @@ public class DartEditorColorProvider {
    * @return the color stored in the color table for the given RGB value
    */
   public Color getColor(RGB rgb) {
-    Color color = colorTable.get(rgb);
+    Color color = colorMap.get(rgb);
     if (color == null) {
       color = new Color(Display.getCurrent(), rgb);
-      colorTable.put(rgb, color);
+      colorMap.put(rgb, color);
     }
     return color;
   }

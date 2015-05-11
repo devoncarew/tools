@@ -13,6 +13,7 @@
  */
 package org.dartlang.tools.editor;
 
+import org.dartlang.tools.editor.dartdoc.DartCommentIndentStrategy;
 import org.dartlang.tools.editor.dartdoc.DartDocScanner;
 import org.dartlang.tools.editor.util.DartEditorColorProvider;
 import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
@@ -47,9 +48,15 @@ public class DartEditorSourceViewerConfiguration extends SourceViewerConfigurati
 
   @Override
   public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
-    IAutoEditStrategy strategy = (IDocument.DEFAULT_CONTENT_TYPE.equals(contentType)
-        ? new DartAutoIndentStrategy() : new DefaultIndentLineAutoEditStrategy());
-    return new IAutoEditStrategy[] {strategy};
+    if (IDocument.DEFAULT_CONTENT_TYPE.equals(contentType)) {
+      return new IAutoEditStrategy[] {new DartAutoIndentStrategy()};
+    } else if (DartPartitionScanner.DART_DOC.equals(contentType)) {
+      return new IAutoEditStrategy[] {new DartCommentIndentStrategy()};
+    } else if (DartPartitionScanner.DART_COMMENT.equals(contentType)) {
+      return new IAutoEditStrategy[] {new DartCommentIndentStrategy()};
+    } else {
+      return new IAutoEditStrategy[] {new DefaultIndentLineAutoEditStrategy()};
+    }
   }
 
   @Override
@@ -125,6 +132,8 @@ public class DartEditorSourceViewerConfiguration extends SourceViewerConfigurati
 
   @Override
   public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
-    return new DartTextHover();
+    // TODO:
+    //return new DartTextHover();
+    return null;
   }
 }

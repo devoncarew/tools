@@ -11,20 +11,29 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools;
+package org.dartlang.tools.editor;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.dartlang.tools.TestRunnable;
+import org.dartlang.tools.TestUtils;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-@RunWith(Suite.class)
-@SuiteClasses({org.dartlang.tools.builder.AllTests.class, //
-    org.dartlang.tools.editor.AllTests.class, //
-    org.dartlang.tools.perspective.AllTests.class, //
-    org.dartlang.tools.preferences.AllTests.class, //
-    org.dartlang.tools.sdk.AllTests.class, //
-    org.dartlang.tools.utils.AllTests.class //
-})
-public class AllTests {
+public class DartEditorTest {
+  @BeforeClass
+  public static void preFlight() throws Exception {
+    TestUtils.preFlight();
+  }
 
+  @Test
+  public void testCreateEditor() throws Throwable {
+    TestUtils.syncExec(new TestRunnable() {
+      @Override
+      public void run() throws Throwable {
+        // TODO: We need a test project.
+
+        // TODO: Open an editor on a dart file; verify that it opens.
+
+      }
+    });
+  }
 }

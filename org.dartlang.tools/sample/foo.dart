@@ -16,13 +16,20 @@ import 'dart:html';
  * One two three.
  */
 void main(List<String> args) {
-  /* print('some code here');
+  /*print('some code here');
   print('some code here');*/
 
+  print('some code here');
+
+  //print('some code here');
+  print('some code here');
 }
 
 /// Some more comments.
-/// And a [reference].
+/// And a [reference] to something.
+///
+///     print('foo 1');
+///     print('foo 2');
 @AnAnnotation
 void bar() {
   print('one two three');
