@@ -20,9 +20,9 @@ import org.dartlang.tools.editor.util.DartEditorColorProvider;
 import org.dartlang.tools.editor.util.DartWhitespaceDetector;
 import org.dartlang.tools.editor.util.DartWordDetector;
 import org.eclipse.jface.text.TextAttribute;
-import org.eclipse.jface.text.rules.EndOfLineRule;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
+import org.eclipse.jface.text.rules.IWordDetector;
 import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.SingleLineRule;
@@ -31,6 +31,18 @@ import org.eclipse.jface.text.rules.WhitespaceRule;
 import org.eclipse.jface.text.rules.WordRule;
 
 public class DartCodeScanner extends RuleBasedScanner {
+  private static class AnnotationDetector implements IWordDetector {
+    @Override
+    public boolean isWordPart(char c) {
+      return Character.isJavaIdentifierPart(c);
+    }
+
+    @Override
+    public boolean isWordStart(char c) {
+      return '@' == c;
+    }
+  }
+
   private static String[] keywords = {
       "abstract", "assert", "async", "await", "break", "case", "catch", "class", "const",
       "continue", "default", "deferred", "do", "else", "enum", "export", "extends", "external",
@@ -39,25 +51,18 @@ public class DartCodeScanner extends RuleBasedScanner {
       "show", "static", "super", "switch", "this", "throw", "try", "typedef", "while", "with"};
 
   private static String[] types = {
-      "void", "bool", "num", "int", "double", "dynamic", "var", "String"};
+      "bool", "double", "dynamic", "int", "num", "String", "var", "void"};
 
-  private static String[] constants = {"true", "false", "null"};
+  private static String[] constants = {"false", "null", "true"};
 
   public DartCodeScanner(DartEditorColorProvider provider) {
+    IToken other = new Token(new TextAttribute(provider.getColor(DartEditorColorProvider.DEFAULT)));
     IToken keyword = new Token(
         new TextAttribute(provider.getColor(DartEditorColorProvider.KEYWORD)));
     IToken type = new Token(new TextAttribute(provider.getColor(DartEditorColorProvider.TYPE)));
     IToken string = new Token(new TextAttribute(provider.getColor(DartEditorColorProvider.STRING)));
-    IToken comment = new Token(
-        new TextAttribute(provider.getColor(DartEditorColorProvider.COMMENT)));
-    IToken other = new Token(new TextAttribute(provider.getColor(DartEditorColorProvider.DEFAULT)));
 
     List<IRule> rules = new ArrayList<IRule>();
-
-    // TODO: annotations
-
-    // Add rule for single line comments.
-    rules.add(new EndOfLineRule("//", comment));
 
     // Add rule for strings and character constants.
     rules.add(new MultiLineRule("r'''", "'''", string, (char) 0, true));
@@ -84,6 +89,8 @@ public class DartCodeScanner extends RuleBasedScanner {
       wordRule.addWord(constants[i], type);
     }
     rules.add(wordRule);
+
+    rules.add(new WordRule(new AnnotationDetector(), type));
 
     IRule[] result = new IRule[rules.size()];
     rules.toArray(result);

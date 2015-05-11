@@ -11,20 +11,18 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.dartlang.tools;
+package org.dartlang.tools.editor.dartdoc;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
 
-@RunWith(Suite.class)
-@SuiteClasses({org.dartlang.tools.builder.AllTests.class, //
-    org.dartlang.tools.editor.AllTests.class, //
-    org.dartlang.tools.perspective.AllTests.class, //
-    org.dartlang.tools.preferences.AllTests.class, //
-    org.dartlang.tools.sdk.AllTests.class, //
-    org.dartlang.tools.utils.AllTests.class //
-})
-public class AllTests {
+// TODO: Extend multi-line comments and dartdoc comments appropriately.
 
+/**
+ * Handle auto-indent for `///`, `/**`, `/*`, and `//`.
+ */
+public class DartCommentIndentStrategy extends DefaultIndentLineAutoEditStrategy {
+
+  public DartCommentIndentStrategy() {
+
+  }
 }
