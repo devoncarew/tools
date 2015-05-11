@@ -1,8 +1,5 @@
-org.dartlang.tools/
-org.dartlang.tools.test/
-org.eclipse.ui.editors/
+org.dartlang.*/
+org.eclipse.ui.*/
 org.eclipse.ui.ide/
-org.eclipse.ui.workbench/
-org.eclipse.ui.workbench.texteditor/
 foo/
 .metadata/
