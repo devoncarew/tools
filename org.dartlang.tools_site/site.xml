@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.dartlang.tools_feature_0.0.4.201505111154.jar" id="org.dartlang.tools_feature" version="0.0.4.201505111154">
+   <feature url="features/org.dartlang.tools_feature_0.0.4.201505112241.jar" id="org.dartlang.tools_feature" version="0.0.4.201505112241">
       <category name="Dart"/>
    </feature>
    <category-def name="Dart" label="Dart"/>
