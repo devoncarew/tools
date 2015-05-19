@@ -82,6 +82,17 @@ class PubJob extends ToolJob {
   @Override
   protected String createToastMessage(ToolResult result) {
     if (result.exitCode == 0) {
+      // Look for a good status in the output; else use the last line.
+      // "Changed 18 dependencies!", "No dependencies changed.", "Got dependencies!"
+      String[] lines = result.stdout.split("\n");
+
+      for (String line : lines) {
+        line = line.trim();
+        if (line.endsWith(" dependencies!")) {
+          return name + ": " + line;
+        }
+      }
+
       return name + ": " + result.getLastStdoutLine().toLowerCase();
     } else {
       return super.createToastMessage(result);
