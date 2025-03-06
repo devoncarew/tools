@@ -2,6 +2,21 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+part 'registry.g.dart';
+
+final Map<String, String> newExtToMime = () {
+  final result = <String, String>{};
+
+  for (final mime in registryDefaults.keys) {
+    final exts = registryDefaults[mime]!;
+    for (final ext in exts) {
+      result[ext] = mime;
+    }
+  }
+
+  return result;
+}();
+
 const Map<String, String> defaultExtensionMap = <String, String>{
   '123': 'application/vnd.lotus-1-2-3',
   '3dml': 'text/vnd.in3d.3dml',
